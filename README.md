@@ -11,6 +11,6 @@ These are the bash scripts used at CIAT to run the NGSEP pipeline for GBS reads.
 ``` bash
     ./runPipeline.sh pop_name samples.txt samples_per_thread num_of_threads min_num_of_inds_genotyped &
 ```
-6. And relax.
+And relax.
 
 Note: Reads should be single-end and should already be demultiplexed (you can use NGSEP to deconvolute reads)
