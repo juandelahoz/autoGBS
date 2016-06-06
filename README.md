@@ -8,6 +8,7 @@ These are the bash scripts used at CIAT to run the NGSEP pipeline for GBS reads.
 3. Modify the software and reference file variables in each script.
 4. Define the parentals for imputation in `population/runFilter.sh`
 5. Type:
+
     ./runPipeline.sh pop_name samples.txt samples_per_thread num_of_threads min_num_of_inds_genotyped &
 
 6. And relax.
