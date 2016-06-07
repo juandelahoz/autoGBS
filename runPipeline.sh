@@ -1,13 +1,12 @@
 ### MANUALLY EDIT THESE VARIABLES ###
  # population parameters
-pop="beans"			# population name
+pop="beans"                     # population name
 parents="P01,P02,P03,P04"       # for imputation
-quality="20 30 40 60"           # genotype quality filter
 t=5                             # number of threads
-i5=1				# trim read on the 5' end
-i3=4				# trim read on the 3' end
-exp_het=0.0001			# expected heterozygosity
-cm_x_kb=0.003			# centimorgans per Kbp
+i5=1                            # trim read on the 5' end
+i3=4                            # trim read on the 3' end
+exp_het=0.0001                  # expected heterozygosity
+cm_x_kb=0.003                   # centimorgans per Kbp
 
  # reference files
 REF=/path/to/indexed_reference.fa
@@ -25,8 +24,8 @@ NGSEP=/path/to/software/NGSEP.jar
 ls -1 reads/*.fastq.gz | awk '{print substr($1,7,index($1,".fastq.gz")-7)}' >samples.txt
 numsampl=`wc -l samples.txt | awk '{print $1}'`
 s=`expr $numsampl / $t`
-s=`expr $s + 1`			# samples per thread
-mI=`expr $numsampl / 2`		# min num of inds genotyped ~50%
+s=`expr $s + 1`                 # samples per thread
+mI=`expr $numsampl / 2`         # min num of inds genotyped ~50%
 
  # pipeline
 
@@ -56,4 +55,4 @@ java -jar ${NGSEP} MergeVCF ${seqnames} ../genotyping/*NGSEP_gt.vcf 1>${pop}.vcf
 java -jar ${NGSEP} Annotate ${pop}.vcf ${genes} ${REF} 1>${pop}_annotated.vcf
 java -Xmx3g -jar ${NGSEP} SummaryStats -m 1 ${pop}_annotated.vcf 1>${pop}_annotated_summary.stats &
 
-./runFilter.sh $pop $mI $quality $parents $cm_x_kb $reps $NGSEP
+./runFilter.sh $pop $mI $parents $cm_x_kb $reps $NGSEP

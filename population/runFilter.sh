@@ -1,10 +1,10 @@
 pop=$1
 mI=$2
-quality=$3
-parents=$4
-cm_x_kb=$5
-reps=$6
-NGSEP=$7
+parents=$3
+cm_x_kb=$4
+reps=$5
+NGSEP=$6
+quality="20 40 60"           # genotype quality filter
 
  # filter by quality, keep only SNPs, remove positions that are highly heterozygous, with very low MAF or with few samples genotyped, impute and compress.
 
