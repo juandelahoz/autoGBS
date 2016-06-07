@@ -1,16 +1,15 @@
 # autoGBS
 These are the bash scripts used at CIAT to run the NGSEP pipeline for GBS reads.
 
-## Run the pipeline in 6 single steps:
+### Run the pipeline in 4 single steps:
 1. Read and understand the scripts
 2. Place the reads in their directory:
- ..- one `*.fastq.gz` file per sample, with the ID of the sample in the `*` place.
-3. Modify the software and reference file variables in each script.
-4. Define the parentals for imputation in `population/runFilter.sh`
-5. Type:
+ ..- one `ID.fastq.gz` file per sample, with a different ID for each sample.
+3. Modify the population, software and reference variables in `runPipeline.sh`
+4. Type:
 ``` bash
-    ./runPipeline.sh pop_name samples.txt samples_per_thread num_of_threads min_num_of_inds_genotyped &
+./runPipeline.sh &
 ```
-And relax.
 
-Note: Reads should be single-end and should already be demultiplexed (you can use NGSEP to deconvolute reads)
+Note.1: Reads should be single-end and already demultiplexed (use `java -jar NGSEP.jar Deconvolute`)
+Note.2: Expected heterozygozity and other population parameters are set for Common Bean

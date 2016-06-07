@@ -1,14 +1,14 @@
-p=$1;
+p=$1
+i5=$2
+i3=$3
+exp_het=$4
+REF=$5
+STRs=$6
+BOWTIE2=$7
+PICARD=$8
+NGSEP=$9
 
- # input files
-f=../reads/${p}.fastq.gz;
-REF=/data/references/bean/bowtie2/Pvulgaris218_phytozome.fa;
-STRs=/data/references/bean/strs/Pvulgaris218_trf_2_7_7_80_10_20_50_filter1.txt;
-
- # software variables
-BOWTIE2=/data/software/bowtie2-2.2.6/bowtie2;
-PICARD=/data/software/picard-tools-1.140/picard.jar;
-NGSEP=/data/software/internal/NGSToolsApp_2.1.5.jar;
+f=../reads/${p}.fastq.gz
 
  # map the reads and sort the alignment
 mkdir ${p}_tmpdir
@@ -20,5 +20,5 @@ java -Xmx3g -jar ${NGSEP} QualStats ${REF} ${p}_bowtie2_sorted.bam >& ${p}_bowti
 java -Xmx3g -jar ${NGSEP} CoverageStats ${p}_bowtie2_sorted.bam ${p}_bowtie2_coverage.stats >& ${p}_bowtie2_coverage.log &
 
  # find variants
-java -Xmx6g -jar ${NGSEP} FindVariants -h 0.0001 -maxBaseQS 30 -minQuality 40 -noRep -noRD -noRP -maxAlnsPerStartPos 100 -ignore5 1 -ignore3 4 -sampleId ${p} -knownSTRs ${STRs} ${REF} ${p}_bowtie2_sorted.bam ${p}_bowtie2_NGSEP >& ${p}_bowtie2_NGSEP.log
+java -Xmx6g -jar ${NGSEP} FindVariants -h ${exp_het} -maxBaseQS 30 -minQuality 40 -noRep -noRD -noRP -maxAlnsPerStartPos 100 -ignore5 ${i5} -ignore3 ${i3} -sampleId ${p} -knownSTRs ${STRs} ${REF} ${p}_bowtie2_sorted.bam ${p}_bowtie2_NGSEP >& ${p}_bowtie2_NGSEP.log
 
